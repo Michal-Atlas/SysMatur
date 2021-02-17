@@ -7,12 +7,14 @@ namespace DatabaseModel
     {
         public DbSet<User> Users { get; set; }
         public DbSet<View> Views { get; set; }
-        public DbSet<RSSFeed> RssFeeds { get; set; }
+        public DbSet<Feed> Feeds { get; set; }
         public DbSet<Domain> Domains { get; set; }
         public DbSet<CookieToken> CookieTokens { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             //    => options.UseSqlite("Data Source=blogging.db");
-            => options.UseSqlServer("Server=localhost; Uid=sa; Pwd=Temp1234");
+        {
+            options.UseSqlServer("Server=localhost; Uid=sa; Pwd=Temp1234");
+        }
     }
 }

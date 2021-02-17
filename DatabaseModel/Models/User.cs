@@ -7,11 +7,10 @@ namespace DatabaseModel.Models
     {
         [Key] public int Id { get; set; }
 
-        public string UserName { get; set; }
-        public string PassHash { get; set; }
-        public string Salt { get; set; }
+        public string DisplayName { get; set; }
+        public string Auth0Sub { get; set; }
         public List<CookieToken> CookieTokens { get; set; }
         public List<View> Views { get; set; }
-        public List<RSSFeed> RssFeeds { get; set; }
+        public List<Feed> Feeds { get; set; }
     }
 }

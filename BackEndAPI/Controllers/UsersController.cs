@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using DatabaseModel;
 using DatabaseModel.Models;
@@ -7,9 +8,16 @@ namespace BackEndAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly SysMaturDbContext dbcontext = new();
+
+        [HttpGet]
+        [Route("All")]
+        public IEnumerable<User> GetAll()
+        {
+            return dbcontext.Users;
+        }
 
         [HttpGet]
         [Route("Debug")]
@@ -18,26 +26,18 @@ namespace BackEndAPI.Controllers
             return dbcontext.Users.Count();
         }
 
-        /// <summary>
-        ///     User by ID
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public User Get(int id)
         {
             return dbcontext.Users.Find(id);
         }
 
-        /// <summary>
-        ///     Add User
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <returns></returns>
-        [HttpPut]
-        public int Put(string userName)
+        [HttpDelete]
+        public int Delete(int id)
         {
-            dbcontext.Users.Add(new User {UserName = userName});
-            return dbcontext.SaveChanges();
+            dbcontext.Users.Remove(dbcontext.Users.Find(id));
+            dbcontext.SaveChanges();
+            return 200;
         }
     }
 }
