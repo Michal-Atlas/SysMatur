@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import AddFeed from "./components/Forms/AddFeed";
 
 export class Feeds extends Component {
     constructor(props) {
@@ -38,6 +39,7 @@ export class Feeds extends Component {
         return (
             <div>
                 <h1 id="tabelLabel">Users</h1>
+                <AddFeed/>
                 <p>This component demonstrates fetching data from the server.</p>
                 {contents}
             </div>

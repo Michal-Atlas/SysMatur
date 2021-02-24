@@ -12,9 +12,9 @@ namespace DatabaseModel
         public DbSet<CookieToken> CookieTokens { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            //    => options.UseSqlite("Data Source=blogging.db");
+            // => options.UseSqlite("Data Source=blogging.db");
         {
-            options.UseSqlServer("Server=localhost; Uid=sa; Pwd=Temp1234");
+            options.UseSqlServer("Server=192.168.0.100; Uid=sa; Pwd=Temp1234");
         }
     }
 }

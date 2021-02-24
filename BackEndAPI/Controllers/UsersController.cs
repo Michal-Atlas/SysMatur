@@ -20,7 +20,7 @@ namespace BackEndAPI.Controllers
         }
 
         [HttpGet]
-        [Route("Debug")]
+        [Route("Total")]
         public int Get()
         {
             return dbcontext.Users.Count();
@@ -32,12 +32,36 @@ namespace BackEndAPI.Controllers
             return dbcontext.Users.Find(id);
         }
 
+        [HttpPost]
+        [Route("CookieTokens")]
+        public void AddCookieToken(int userId, string address, string token)
+        {
+            dbcontext.Users.Find(userId).CookieTokens.Add(new CookieToken
+                {Domain = new Domain {Address = address}, Token = token});
+            dbcontext.SaveChanges();
+        }
+
+        [HttpGet]
+        [Route("CookieTokens")]
+        public IEnumerable<CookieToken> GetCookieTokens(int userId)
+        {
+            return dbcontext.Users.Find(userId).CookieTokens;
+        }
+
         [HttpDelete]
         public int Delete(int id)
         {
             dbcontext.Users.Remove(dbcontext.Users.Find(id));
             dbcontext.SaveChanges();
             return 200;
+        }
+
+        [HttpPost]
+        [Route("Create")]
+        public void Create(string name)
+        {
+            dbcontext.Users.Add(new User {DisplayName = name});
+            dbcontext.SaveChanges();
         }
     }
 }

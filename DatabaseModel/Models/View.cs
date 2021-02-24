@@ -5,7 +5,12 @@ namespace DatabaseModel.Models
 {
     public class View
     {
+        public View()
+        {
+            Feeds = new List<Feed>();
+        }
+
         [Key] public int Id { get; set; }
-        public List<Feed> Feeds { get; set; }
+        public IEnumerable<Feed> Feeds { get; set; }
     }
 }
