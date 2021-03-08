@@ -2,22 +2,17 @@
 
 ## Design Concept
 
-Webová stránka, kde si člověk může shrnout všechny své Feedy do jednoho.
-Člověk by si nalinkoval všechny své ostatní sociální sítě, jako FB, IG, Reddit, Twitter,
-a měl by z nich, jeden hezký feed.
-Hodně stránek má vlastní API, ale mám iluzi toho,
-že by možná bylo možné aby si člověk mohl vytvořit "post model" pro libovolnou stránku,
-auth_token a sledovat tím jakoukoli část internetu.
-Samozřejmně začnu pouze tím, že umožním použít pár základních API,
-samozřejmě chci auth_tokeny uživatelům synchronizovat,
-aby se uživatel pouze přihlásil svým účtem pro tuto stránku a měl všechny ostatní už připravené.
-Pokud to jenom bude možné, měli by tu fungovat kvalitní RSS feedy.
-Určitě bych to použil, a bezpochyby vidím stále lidi nejdříve otevřit Twitter a pak Instagram,
-já bych alespoň nepřišel o to pokud by mi někdo psal na stránce kterou už nechci kontrolovat,
-mimo jiné bych si spojil asi 8 různých míst, mohl bych mít jednu appku místo 5ti appek a 3 stránek.
-Samozřejmě je to i lepší co do soukromý.
-Pravděpodobně zde půjde použít klasicky Angular a ASP.NET, třeba Xamarin na aplikaci,
-ale kdyby nebylo třeba žádné offline funkcionality tak by se dali použít i levné způsoby jako Cordova.
+A website where you can summarize all your Feeds into one.
+One would link all their other social networks, like FB, IG, Reddit, Twitter, and have one nice feed created from them.
+Of course, I will only start by allowing the use of a few basic APIs,
+and of course I want to synchronize the auth tokens of the users so that the user only logs in with their one account for this page
+and has all the others all prepared.
+If possible, RSS feeds should also work.
+I would definitely use the product, and no doubt I still see people open Twitter first and then Instagram,
+I would at least notice if someone wrote to me on a page that I no longer want to check,
+among other things I would connect about 8 different places, I could have one app instead of 5 apps and 3 pages.
+
+You can probably use classic React.ts and ASP.NET here.
 
 ## Functional and Non-functional specification
 
