@@ -7,6 +7,7 @@ import './custom.css'
 import {PrintUsers} from "./components/PrintUsers";
 import Profile from "./components/Profile";
 import {Feeds} from "./Feeds";
+import RSS from "./components/RSS";
 
 export default class App extends Component {
     static displayName = App.name;
@@ -18,6 +19,7 @@ export default class App extends Component {
                 <Route path='/print-users' component={PrintUsers}/>
                 <Route path='/profile' component={Profile}/>
                 <Route path='/feeds' component={Feeds}/>
+                <Route path='/rss' component={RSS}/>
             </Layout>
         );
     }

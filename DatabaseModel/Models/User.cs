@@ -5,6 +5,13 @@ namespace DatabaseModel.Models
 {
     public class User
     {
+        public User()
+        {
+            Feeds = new List<Feed>();
+            Views = new List<View>();
+            CookieTokens = new List<CookieToken>();
+        }
+
         [Key] public int Id { get; set; }
 
         public string DisplayName { get; set; }

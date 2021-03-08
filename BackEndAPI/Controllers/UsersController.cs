@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DatabaseModel;
 using DatabaseModel.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackEndAPI.Controllers
 {
@@ -10,7 +12,7 @@ namespace BackEndAPI.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly SysMaturDbContext dbcontext = new();
+        private readonly SysMaturDbContext dbcontext = new SysMaturDbContext();
 
         [HttpGet]
         [Route("All")]
@@ -45,7 +47,7 @@ namespace BackEndAPI.Controllers
         [Route("CookieTokens")]
         public IEnumerable<CookieToken> GetCookieTokens(int userId)
         {
-            return dbcontext.Users.Find(userId).CookieTokens;
+            return dbcontext.Users.Include(x=>x.CookieTokens).FirstOrDefault(x=>x.Id==userId)?.CookieTokens;
         }
 
         [HttpDelete]
