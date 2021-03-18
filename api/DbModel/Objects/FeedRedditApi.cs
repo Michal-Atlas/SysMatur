@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace api.DbModel.Objects
 {
@@ -7,5 +6,6 @@ namespace api.DbModel.Objects
     {
         [Key] public int Id { get; set; }
         public Feed Base { get; set; }
+        public string BearerToken { get; set; }
     }
 }
