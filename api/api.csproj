@@ -18,10 +18,4 @@
       <Folder Include="Controllers" />
     </ItemGroup>
 
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="DbModel\bin\Debug\net5.0\DbModel.deps.json" />
-      <_ContentIncludedByDefault Remove="DbModel\bin\Debug\net5.0\DbModel.runtimeconfig.dev.json" />
-      <_ContentIncludedByDefault Remove="DbModel\bin\Debug\net5.0\DbModel.runtimeconfig.json" />
-    </ItemGroup>
-
 </Project>
