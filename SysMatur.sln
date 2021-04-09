@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysMatur.Api", "api\SysMatur.Api.csproj", "{DC4B8615-7F35-4C16-AF75-FEAD1066E059}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{38A4E678-74E4-4271-BE19-C5367BE620BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysMatur.Api", "Api\Api.csproj", "{38A4E678-74E4-4271-BE19-C5367BE620BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysMatur.Data", "DatabaseModel\SysMatur.Data.csproj", "{B98F387C-5C85-438D-87D9-C0B62D356727}"
 EndProject
