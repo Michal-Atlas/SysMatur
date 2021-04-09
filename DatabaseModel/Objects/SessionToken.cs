@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace api.DbModel.Objects
+namespace Data.Objects
 {
     public class SessionToken
     {

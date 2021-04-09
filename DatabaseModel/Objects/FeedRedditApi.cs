@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace api.DbModel.Objects
+namespace Data.Objects
 {
-    public class RedditApi
+    public class FeedRedditApi
     {
         [Key] public int Id { get; set; }
         public Feed Base { get; set; }
