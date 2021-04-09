@@ -39,6 +39,10 @@
   <ItemGroup>
     <Compile Include="Repositories\FeedRedditApiRepository.cs" />
     <Compile Include="Repositories\SessionTokenRepository.cs" />
+    <Compile Include="Services\FeedRedditApiService.cs" />
+    <Compile Include="Services\FeedService.cs" />
+    <Compile Include="Services\SessionTokenService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="SysMaturDbContext.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Objects\Feed.cs" />
@@ -53,10 +57,11 @@
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Services\IFeedRedditApiServices.cs" />
+    <Compile Include="Services\IFeedRedditApiService.cs" />
     <Compile Include="Services\IFeedService.cs" />
     <Compile Include="Services\ISessionTokenService.cs" />
     <Compile Include="Services\IUserService.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">

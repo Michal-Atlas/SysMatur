@@ -1,4 +1,4 @@
-﻿using DatabaseModel.Objects;
+﻿using Data.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace Data.Services
     interface IUserService
     {
         Task<User> CreateUser(User newUser);
-        Task<User> DeleteUser(User user);
-        Task<User> Update(User userToBeUpdated, User user);
+        Task DeleteUser(User user);
+        Task Update(User userToBeUpdated, User user);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,8 @@ namespace Data.Services
     interface ISessionTokenService
     {
         Task<SessionToken> CreateSessionToken(SessionToken newSessionToken);
-        Task<SessionToken> DeleteSessionToken(SessionToken sessionToken);
-        Task<SessionToken> Update(SessionToken sessionTokenToBeUpdated, SessionToken sessionToken);
+        Task DeleteSessionToken(SessionToken sessionToken);
+        Task Update(SessionToken sessionTokenToBeUpdated, SessionToken sessionToken);
         Task<IEnumerable<SessionToken>> GetSessionTokensByUser(int userId);
     }
 }

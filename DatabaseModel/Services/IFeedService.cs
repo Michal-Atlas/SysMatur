@@ -1,4 +1,4 @@
-﻿using DatabaseModel.Objects;
+﻿using Data.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +9,9 @@ namespace Data.Services
 {
     interface IFeedService
     {
-        Task<FeedService> CreateFeedService(FeedService newFeedService);
-        Task<FeedService> DeleteFeedService(FeedService feedService);
-        Task<FeedService> Update(FeedService feedServiceToBeUpdated, FeedService feedService);
+        Task<Feed> CreateFeed(Feed newFeed);
+        Task DeleteFeed(Feed feed);
+        Task Update(Feed feedToBeUpdated, Feed feed);
         Task<IEnumerable<Feed>> GetFeedsByUserId(int id);
     }
 }

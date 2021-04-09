@@ -10,5 +10,6 @@ namespace Data.Repositories
     interface IFeedRepository : IRepository<Feed>
     {
         Task<Feed> GetFeedByIdAsync(int id);
+        Task<IEnumerable<Feed>> GetFeedsByUserIdAsync(int id);
     }
 }
