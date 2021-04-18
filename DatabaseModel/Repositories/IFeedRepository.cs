@@ -1,13 +1,10 @@
-﻿using Data.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Data.Objects;
 
 namespace Data.Repositories
 {
-    interface IFeedRepository : IRepository<Feed>
+    public interface IFeedRepository : IRepository<Feed>
     {
         Task<Feed> GetFeedByIdAsync(int id);
         Task<IEnumerable<Feed>> GetFeedsByUserIdAsync(int id);

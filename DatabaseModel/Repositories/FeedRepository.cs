@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Data.Objects;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
@@ -9,12 +10,19 @@ namespace Data.Repositories
     {
         public FeedRepository(SysMaturDbContext context)
             : base(context)
-        { }
+        {
+        }
+
+        private SysMaturDbContext SysMaturDbContext => Context;
 
         Task<Feed> IFeedRepository.GetFeedByIdAsync(int id)
         {
             return SysMaturDbContext.Feeds.SingleOrDefaultAsync(a => a.Id == id);
         }
-        private SysMaturDbContext SysMaturDbContext { get { return Context as SysMaturDbContext; } }
+
+        public Task<IEnumerable<Feed>> GetFeedsByUserIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

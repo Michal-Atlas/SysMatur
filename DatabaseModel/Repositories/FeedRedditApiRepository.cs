@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Data.Objects;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
@@ -9,12 +8,14 @@ namespace Data.Repositories
     {
         public FeedRedditApiRepository(SysMaturDbContext context)
             : base(context)
-        { }
+        {
+        }
+
+        private SysMaturDbContext SysMaturDbContext => Context;
 
         Task<FeedRedditApi> IFeedRedditApiRepository.GetFeedRedditApiByIdAsync(int id)
         {
             return SysMaturDbContext.FeedRedditApis.SingleOrDefaultAsync(a => a.Id == id);
         }
-        private SysMaturDbContext SysMaturDbContext { get { return Context as SysMaturDbContext; } }
     }
 }

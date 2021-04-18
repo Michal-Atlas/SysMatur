@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Data.Objects;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
@@ -9,12 +10,19 @@ namespace Data.Repositories
     {
         public UserRepository(SysMaturDbContext context)
             : base(context)
-        { }
+        {
+        }
+
+        private SysMaturDbContext SysMaturDbContext => Context;
 
         Task<User> IUserRepository.GetUserByIdAsync(int id)
         {
             return SysMaturDbContext.Users.SingleOrDefaultAsync(a => a.Id == id);
         }
-        private SysMaturDbContext SysMaturDbContext { get { return Context as SysMaturDbContext; } }
+
+        public Task<IEnumerable<SessionToken>> GetWithSessionTokensByIdAsync(int userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

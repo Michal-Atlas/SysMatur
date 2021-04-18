@@ -1,13 +1,9 @@
-﻿using Data.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Data.Objects;
 
 namespace Data.Repositories
 {
-    interface ISessionTokenRepository : IRepository<SessionToken>
+    public interface ISessionTokenRepository : IRepository<SessionToken>
     {
         Task<SessionToken> GetSessionTokenByIdAsync(int id);
     }

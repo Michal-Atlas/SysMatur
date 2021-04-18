@@ -1,13 +1,10 @@
-﻿using Data.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Data.Objects;
 
 namespace Data.Repositories
 {
-    interface IUserRepository : IRepository<User>
+    public interface IUserRepository : IRepository<User>
     {
         Task<User> GetUserByIdAsync(int id);
         Task<IEnumerable<SessionToken>> GetWithSessionTokensByIdAsync(int userId);
