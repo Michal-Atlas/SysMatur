@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Data.Objects;
 using Microsoft.EntityFrameworkCore;
@@ -20,9 +19,9 @@ namespace Data.Repositories
             return SysMaturDbContext.Feeds.SingleOrDefaultAsync(a => a.Id == id);
         }
 
-        public Task<IEnumerable<Feed>> GetFeedsByUserIdAsync(int id)
+        public async Task<IEnumerable<Feed>> GetFeedsByUserIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return SysMaturDbContext.Users.Include(x => x.Feeds).FirstAsync(x => x.Id == id).Result.Feeds;
         }
     }
 }

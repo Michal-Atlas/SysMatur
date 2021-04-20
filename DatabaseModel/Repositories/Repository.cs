@@ -13,8 +13,9 @@ namespace Data.Repositories
 
         public Repository(SysMaturDbContext context)
         {
-            this.Context = context;
+            Context = context;
         }
+
         public async Task AddAsync(TEntity entity)
         {
             await Context.Set<TEntity>().AddAsync(entity);
@@ -53,11 +54,6 @@ namespace Data.Repositories
         public Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return Context.Set<TEntity>().SingleOrDefaultAsync(predicate);
-        }
-
-        Task<TEntity> IRepository<TEntity>.GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

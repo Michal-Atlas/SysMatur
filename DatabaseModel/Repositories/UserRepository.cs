@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Data.Objects;
 using Microsoft.EntityFrameworkCore;
@@ -20,9 +19,10 @@ namespace Data.Repositories
             return SysMaturDbContext.Users.SingleOrDefaultAsync(a => a.Id == id);
         }
 
-        public Task<IEnumerable<SessionToken>> GetWithSessionTokensByIdAsync(int userId)
+        public async Task<IEnumerable<SessionToken>> GetWithSessionTokensByIdAsync(int userId)
         {
-            throw new NotImplementedException();
+            return SysMaturDbContext.Users.Include(x => x.SessionTokens).FirstAsync(x => x.Id == userId).Result
+                .SessionTokens;
         }
     }
 }
