@@ -12,6 +12,8 @@ namespace Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             // => options.UseSqlite("Data Source=blogging.db");
-            => options.UseNpgsql(@"host=localhost; database=SysMatur_T;user id=postgres; password=Temp1234");
+        {
+            options.UseNpgsql(@"host=localhost; database=SysMatur_T;user id=postgres; password=Temp1234");
+        }
     }
 }

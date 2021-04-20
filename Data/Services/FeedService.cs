@@ -1,20 +1,16 @@
-﻿using Data;
-using Data.Objects;
-using Data.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Data.Objects;
 
-namespace DatabaseModel.Services
+namespace Data.Services
 {
-    class FeedService : IFeedService
+    internal class FeedService : IFeedService
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public FeedService(IUnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         async Task<Feed> IFeedService.CreateFeed(Feed newFeed)

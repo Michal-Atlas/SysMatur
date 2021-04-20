@@ -1,13 +1,9 @@
-﻿using Data.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Data.Objects;
 
 namespace Data.Services
 {
-    interface IUserService
+    internal interface IUserService
     {
         Task<User> CreateUser(User newUser);
         Task DeleteUser(User user);

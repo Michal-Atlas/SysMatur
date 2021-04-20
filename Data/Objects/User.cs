@@ -5,6 +5,12 @@ namespace Data.Objects
 {
     public class User
     {
+        public User()
+        {
+            Feeds = new List<Feed>();
+            SessionTokens = new List<SessionToken>();
+        }
+
         [Key] public int Id { get; set; }
 
         public string Username { get; set; }
@@ -13,11 +19,5 @@ namespace Data.Objects
         public string Email { get; set; }
         public List<Feed> Feeds { get; set; }
         public List<SessionToken> SessionTokens { get; set; }
-
-        public User()
-        {
-            Feeds = new List<Feed>();
-            SessionTokens = new List<SessionToken>();
-        }
     }
 }

@@ -1,13 +1,10 @@
-﻿using Data.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Data.Objects;
 
 namespace Data.Services
 {
-    interface IFeedService
+    internal interface IFeedService
     {
         Task<Feed> CreateFeed(Feed newFeed);
         Task DeleteFeed(Feed feed);

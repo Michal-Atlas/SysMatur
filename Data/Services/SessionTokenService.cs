@@ -1,20 +1,16 @@
-﻿using Data;
-using Data.Objects;
-using Data.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Data.Objects;
 
-namespace DatabaseModel.Services
+namespace Data.Services
 {
-    class SessionTokenService : ISessionTokenService
+    internal class SessionTokenService : ISessionTokenService
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public SessionTokenService(IUnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<IEnumerable<SessionToken>> GetSessionTokensByUser(int userId)

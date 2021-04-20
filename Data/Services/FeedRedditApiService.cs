@@ -1,20 +1,15 @@
-﻿using Data;
+﻿using System.Threading.Tasks;
 using Data.Objects;
-using Data.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DatabaseModel.Services
+namespace Data.Services
 {
-    class FeedRedditApiService : IFeedRedditApiService
+    internal class FeedRedditApiService : IFeedRedditApiService
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public FeedRedditApiService(IUnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         async Task<FeedRedditApi> IFeedRedditApiService.CreateFeedRedditApi(FeedRedditApi newFeedRedditApi)
@@ -37,4 +32,3 @@ namespace DatabaseModel.Services
         }
     }
 }
-
