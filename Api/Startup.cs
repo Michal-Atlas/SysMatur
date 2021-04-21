@@ -1,3 +1,4 @@
+using Api.Auth;
 using Data;
 using Data.Services;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +30,9 @@ namespace Api
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IFeedService, FeedService>();
+            services.AddTransient<IAuthenticator, Authenticator>();
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
