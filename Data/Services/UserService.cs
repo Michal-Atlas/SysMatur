@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Data.Objects;
 
 namespace Data.Services
@@ -38,7 +37,7 @@ namespace Data.Services
 
         public async Task<User> GetUserByUsername(string userName)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.Users.GetUserByUsernameAsync(userName);
         }
 
         public async Task<User?> GetUserBySessionToken(string sessionKey)

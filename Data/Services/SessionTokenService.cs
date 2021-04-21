@@ -5,7 +5,7 @@ using Data.Objects;
 
 namespace Data.Services
 {
-    internal class SessionTokenService : ISessionTokenService
+    public class SessionTokenService : ISessionTokenService
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -41,6 +41,11 @@ namespace Data.Services
         public async Task<User> GetUserBySessionToken(string sessionToken)
         {
             return await _unitOfWork.SessionTokens.GetUserFromSessionToken(sessionToken);
+        }
+
+        public async Task<bool> CheckExists(string sessionToken)
+        {
+            return await _unitOfWork.SessionTokens.CheckExists(sessionToken);
         }
 
         public async Task<IEnumerable<SessionToken>> GetSessionTokensByUser(int userId)

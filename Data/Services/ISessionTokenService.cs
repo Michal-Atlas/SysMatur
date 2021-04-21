@@ -11,5 +11,6 @@ namespace Data.Services
         Task Update(SessionToken sessionTokenToBeUpdated, SessionToken sessionToken);
         Task<IEnumerable<SessionToken>> GetSessionTokensByUser(User user);
         Task<User> GetUserBySessionToken(string sessionToken);
+        Task<bool> CheckExists(string sessionToken);
     }
 }
