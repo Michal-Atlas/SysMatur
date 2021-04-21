@@ -24,5 +24,10 @@ namespace Data.Repositories
             return SysMaturDbContext.Users.Include(x => x.SessionTokens).FirstAsync(x => x.Id == userId).Result
                 .SessionTokens;
         }
+
+        public Task<User> GetUserByUsernameAsync(string userName)
+        {
+            return SysMaturDbContext.Users.FirstOrDefaultAsync(x => x.Username == userName);
+        }
     }
 }

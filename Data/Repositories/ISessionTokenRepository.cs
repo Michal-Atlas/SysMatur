@@ -7,5 +7,6 @@ namespace Data.Repositories
     {
         Task<SessionToken> GetSessionTokenByIdAsync(int id);
         Task<User?> GetUserFromSessionToken(string sessionKey);
+        Task<bool> CheckExists(string sessionToken);
     }
 }

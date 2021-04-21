@@ -8,5 +8,6 @@ namespace Data.Repositories
     {
         Task<User> GetUserByIdAsync(int id);
         Task<IEnumerable<SessionToken>> GetWithSessionTokensByIdAsync(int userId);
+        Task<User> GetUserByUsernameAsync(string userName);
     }
 }

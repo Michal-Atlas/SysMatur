@@ -23,5 +23,10 @@ namespace Data.Repositories
             return (await SysMaturDbContext.SessionTokens.Include(x => x.Owner).FirstAsync(x => x.Token == sessionKey))
                 ?.Owner;
         }
+
+        public async Task<bool> CheckExists(string sessionToken)
+        {
+            return await SysMaturDbContext.SessionTokens.AnyAsync(x => x.Token == sessionToken);
+        }
     }
 }
