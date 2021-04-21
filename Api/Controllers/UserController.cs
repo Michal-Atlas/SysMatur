@@ -20,15 +20,17 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(int userId)
+        public async Task<IActionResult> Get()
         {
-            return new ObjectResult(await _userService.GetUserById(userId));
+            var sessionKey = HttpContext.Request.Cookies["sessionKey"];
+            if (sessionKey == null) return new ForbidResult();
+            return new ObjectResult(new UserModel(await _unitOfWork.SessionTokens.GetUserFromSessionToken(sessionKey)));
         }
 
         [HttpPut]
-        public async Task<IActionResult> CreateUser(int id)
+        public async Task<IActionResult> CreateUser(UserModel user)
         {
-            return new ObjectResult(await _userService.CreateUser(new User()));
+            return new ObjectResult(await _userService.CreateUser(user.ToUser()));
         }
     }
 }

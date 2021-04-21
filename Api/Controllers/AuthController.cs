@@ -1,4 +1,5 @@
-using System;
+using System.Threading.Tasks;
+using Api.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -7,10 +8,20 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class AuthController : ControllerBase
     {
-        [HttpGet]
-        public string Get(string username, string passwordHash)
+        private readonly IAuthenticator _authenticator;
+
+        public AuthController(IAuthenticator authenticator)
         {
-            throw new NotImplementedException();
+            _authenticator = authenticator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get(string username, string passwordHash)
+        {
+            var res = await _authenticator.CreateClaim(username, passwordHash);
+            if (res == null) return new ForbidResult();
+
+            return new ObjectResult(res);
         }
     }
 }
