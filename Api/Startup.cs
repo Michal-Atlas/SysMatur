@@ -1,6 +1,7 @@
 using Api.Auth;
 using Data;
 using Data.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,9 +31,12 @@ namespace Api
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IFeedService, FeedService>();
+            services.AddTransient<ISessionTokenService, SessionTokenService>();
             services.AddTransient<IAuthenticator, Authenticator>();
 
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
