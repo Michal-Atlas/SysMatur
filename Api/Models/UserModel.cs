@@ -10,14 +10,22 @@ namespace Api.Models
             Email = user.Email;
         }
 
+        public UserModel()
+        {
+        }
+
         public string Username { get; set; }
         public string Email { get; set; }
-        public string PasswordSalt { get; set; }
-        public string PasswordHash { get; set; }
 
-        public User ToUser()
+        public User ToUser(string passwordHash, string passwordSalt)
         {
-            return new() {Username = Username, Email = Email, PasswordHash = PasswordHash, PasswordSalt = PasswordSalt};
+            return new()
+            {
+                Username = Username,
+                Email = Email,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt
+            };
         }
     }
 }
