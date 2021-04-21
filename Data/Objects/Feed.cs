@@ -9,6 +9,7 @@ namespace Data.Objects
 
         public bool Visible { get; set; }
         public ApiType ApiType { get; set; }
+        public User Owner { get; set; }
     }
 
     public enum ApiType
