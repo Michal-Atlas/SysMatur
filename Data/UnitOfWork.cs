@@ -6,8 +6,8 @@ namespace Data
     public class UnitOfWork : IUnitOfWork
     {
         private readonly SysMaturDbContext _context;
-        private FeedRedditApiRepository _feedRedditApiRepository;
         private FeedRepository _feedRepository;
+        private FeedRssRepository _feedRssRepository;
         private SessionTokenRepository _sessionTokenRepository;
         private UserRepository _userRepository;
 
@@ -20,8 +20,8 @@ namespace Data
 
         public IFeedRepository Feeds => _feedRepository ??= new FeedRepository(_context);
 
-        public IFeedRedditApiRepository FeedRedditApis =>
-            _feedRedditApiRepository ??= new FeedRedditApiRepository(_context);
+        public IFeedRssRepository FeedRss =>
+            _feedRssRepository ??= new FeedRssRepository(_context);
 
         public ISessionTokenRepository SessionTokens =>
             _sessionTokenRepository ??= new SessionTokenRepository(_context);

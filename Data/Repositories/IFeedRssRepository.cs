@@ -3,7 +3,7 @@ using Data.Objects;
 
 namespace Data.Repositories
 {
-    public interface IFeedRedditApiRepository : IRepository<FeedRedditApi>
+    public interface IFeedRssRepository : IRepository<FeedRss>
     {
         Task<FeedRedditApi> GetFeedRedditApiByIdAsync(int id);
     }

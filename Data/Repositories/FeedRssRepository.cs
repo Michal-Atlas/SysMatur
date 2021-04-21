@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
-    public class FeedRedditApiRepository : Repository<FeedRedditApi>, IFeedRedditApiRepository
+    public class FeedRssRepository : Repository<FeedRss>, IFeedRssRepository
     {
-        public FeedRedditApiRepository(SysMaturDbContext context)
+        public FeedRssRepository(SysMaturDbContext context)
             : base(context)
         {
         }
 
         private SysMaturDbContext SysMaturDbContext => Context;
 
-        Task<FeedRedditApi> IFeedRedditApiRepository.GetFeedRedditApiByIdAsync(int id)
+        Task<FeedRedditApi> IFeedRssRepository.GetFeedRedditApiByIdAsync(int id)
         {
             return SysMaturDbContext.FeedRedditApis.SingleOrDefaultAsync(a => a.Id == id);
         }

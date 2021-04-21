@@ -8,7 +8,7 @@ namespace Data
     {
         public IUserRepository Users { get; }
         public IFeedRepository Feeds { get; }
-        public IFeedRedditApiRepository FeedRedditApis { get; }
+        public IFeedRssRepository FeedRss { get; }
         public ISessionTokenRepository SessionTokens { get; }
         public Task<int> CommitAsync();
     }
