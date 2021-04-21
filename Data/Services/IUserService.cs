@@ -9,5 +9,7 @@ namespace Data.Services
         Task<User> CreateUser(User newUser);
         Task DeleteUser(User user);
         Task Update(User userToBeUpdated, User user);
+        Task<User> GetUserByUsername(string userName);
+        Task<User?> GetUserBySessionToken(string sessionKey);
     }
 }

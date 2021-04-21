@@ -4,11 +4,12 @@ using Data.Objects;
 
 namespace Data.Services
 {
-    internal interface ISessionTokenService
+    public interface ISessionTokenService
     {
         Task<SessionToken> CreateSessionToken(SessionToken newSessionToken);
         Task DeleteSessionToken(SessionToken sessionToken);
         Task Update(SessionToken sessionTokenToBeUpdated, SessionToken sessionToken);
-        Task<IEnumerable<SessionToken>> GetSessionTokensByUser(int userId);
+        Task<IEnumerable<SessionToken>> GetSessionTokensByUser(User user);
+        Task<User> GetUserBySessionToken(string sessionToken);
     }
 }

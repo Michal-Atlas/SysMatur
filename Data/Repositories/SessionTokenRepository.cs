@@ -17,5 +17,11 @@ namespace Data.Repositories
         {
             return SysMaturDbContext.SessionTokens.SingleOrDefaultAsync(a => a.Id == id);
         }
+
+        public async Task<User?> GetUserFromSessionToken(string sessionKey)
+        {
+            return (await SysMaturDbContext.SessionTokens.Include(x => x.Owner).FirstAsync(x => x.Token == sessionKey))
+                ?.Owner;
+        }
     }
 }

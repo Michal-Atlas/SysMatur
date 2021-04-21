@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Data.Objects;
 
@@ -11,11 +12,6 @@ namespace Data.Services
         public SessionTokenService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-        }
-
-        public async Task<IEnumerable<SessionToken>> GetSessionTokensByUser(int userId)
-        {
-            return await _unitOfWork.Users.GetWithSessionTokensByIdAsync(userId);
         }
 
         async Task<SessionToken> ISessionTokenService.CreateSessionToken(SessionToken newSessionToken)
@@ -35,6 +31,21 @@ namespace Data.Services
         {
             sessionTokenToBeUpdated = sessionToken;
             await _unitOfWork.CommitAsync();
+        }
+
+        public async Task<IEnumerable<SessionToken>> GetSessionTokensByUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<User> GetUserBySessionToken(string sessionToken)
+        {
+            return await _unitOfWork.SessionTokens.GetUserFromSessionToken(sessionToken);
+        }
+
+        public async Task<IEnumerable<SessionToken>> GetSessionTokensByUser(int userId)
+        {
+            return await _unitOfWork.Users.GetWithSessionTokensByIdAsync(userId);
         }
     }
 }

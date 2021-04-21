@@ -6,5 +6,6 @@ namespace Data.Repositories
     public interface ISessionTokenRepository : IRepository<SessionToken>
     {
         Task<SessionToken> GetSessionTokenByIdAsync(int id);
+        Task<User?> GetUserFromSessionToken(string sessionKey);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Data.Objects;
 
 namespace Data.Services
@@ -32,8 +33,17 @@ namespace Data.Services
 
         public async Task Update(User userToBeUpdated, User user)
         {
-            userToBeUpdated = user;
             await _unitOfWork.CommitAsync();
+        }
+
+        public async Task<User> GetUserByUsername(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<User?> GetUserBySessionToken(string sessionKey)
+        {
+            return await _unitOfWork.SessionTokens.GetUserFromSessionToken(sessionKey);
         }
     }
 }
