@@ -10,5 +10,6 @@ namespace Api.Models
         public string Body { get; set; }
         public IEnumerable<Uri> Images { get; set; }
         public string Summary { get; set; }
+        public Uri Anchor { get; set; }
     }
 }

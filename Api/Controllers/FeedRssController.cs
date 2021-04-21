@@ -38,7 +38,8 @@ namespace Api.Controllers
                     Date = item.PublishDate,
                     Images = item.Images,
                     Summary = item.Summary,
-                    Body = item.Content
+                    Body = item.Content,
+                    Anchor = item.Uri
                 });
 
             return new ObjectResult(output);
