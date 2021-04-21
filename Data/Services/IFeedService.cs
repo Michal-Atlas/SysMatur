@@ -4,7 +4,7 @@ using Data.Objects;
 
 namespace Data.Services
 {
-    internal interface IFeedService
+    public interface IFeedService
     {
         Task<Feed> CreateFeed(Feed newFeed);
         Task DeleteFeed(Feed feed);

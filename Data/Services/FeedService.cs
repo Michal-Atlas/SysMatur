@@ -4,7 +4,7 @@ using Data.Objects;
 
 namespace Data.Services
 {
-    internal class FeedService : IFeedService
+    public class FeedService : IFeedService
     {
         private readonly IUnitOfWork _unitOfWork;
 

@@ -3,8 +3,9 @@ using Data.Objects;
 
 namespace Data.Services
 {
-    internal interface IUserService
+    public interface IUserService
     {
+        Task<User> GetUserById(int id);
         Task<User> CreateUser(User newUser);
         Task DeleteUser(User user);
         Task Update(User userToBeUpdated, User user);
