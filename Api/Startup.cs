@@ -34,8 +34,6 @@ namespace Api
             services.AddTransient<ISessionTokenService, SessionTokenService>();
             services.AddTransient<IAuthenticator, Authenticator>();
 
-            services.AddAutoMapper(typeof(Startup));
-
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
         }
 
