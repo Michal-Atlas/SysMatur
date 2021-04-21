@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Api.Models;
 using Data;
 using Data.Objects;
 using Data.Services;
@@ -28,9 +29,16 @@ namespace Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> CreateUser(UserModel user)
+        public async Task<IActionResult> CreateUser(UserModel user, string passwordHash, string passwordSalt)
         {
-            return new ObjectResult(await _userService.CreateUser(user.ToUser()));
+            return new ObjectResult(await _userService.CreateUser(user.ToUser(passwordHash, passwordSalt)));
+        }
+
+        [HttpGet]
+        [Route("salt")]
+        public async Task<IActionResult> GetSalt(string userName)
+        {
+            return new ObjectResult((await _userService.GetUserByUsername(userName)).PasswordSalt);
         }
     }
 }

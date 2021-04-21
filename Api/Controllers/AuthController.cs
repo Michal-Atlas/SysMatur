@@ -15,12 +15,11 @@ namespace Api.Controllers
             _authenticator = authenticator;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get(string username, string passwordHash)
+        [HttpPut]
+        public async Task<IActionResult> New(string username, string passwordHash)
         {
             var res = await _authenticator.CreateClaim(username, passwordHash);
             if (res == null) return new ForbidResult();
-
             return new ObjectResult(res);
         }
     }
