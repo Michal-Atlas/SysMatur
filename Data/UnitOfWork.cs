@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Data.Repositories;
 
 namespace Data
@@ -12,22 +11,27 @@ namespace Data
         private SessionTokenRepository _sessionTokenRepository;
         private UserRepository _userRepository;
 
-        IUserRepository IUnitOfWork.Users => _userRepository = _userRepository ?? new UserRepository(_context);
+        public UnitOfWork(SysMaturDbContext context)
+        {
+            _context = context;
+        }
 
-        IFeedRepository IUnitOfWork.Feeds => _feedRepository = _feedRepository ?? new FeedRepository(_context);
+        public IUserRepository Users => _userRepository ??= new UserRepository(_context);
 
-        IFeedRedditApiRepository IUnitOfWork.FeedRedditApis => _feedRedditApiRepository =
-            _feedRedditApiRepository ?? new FeedRedditApiRepository(_context);
+        public IFeedRepository Feeds => _feedRepository ??= new FeedRepository(_context);
 
-        ISessionTokenRepository IUnitOfWork.SessionTokens => _sessionTokenRepository =
-            _sessionTokenRepository ?? new SessionTokenRepository(_context);
+        public IFeedRedditApiRepository FeedRedditApis =>
+            _feedRedditApiRepository ??= new FeedRedditApiRepository(_context);
 
-        async Task<int> IUnitOfWork.CommitAsync()
+        public ISessionTokenRepository SessionTokens =>
+            _sessionTokenRepository ??= new SessionTokenRepository(_context);
+
+        public async Task<int> CommitAsync()
         {
             return await _context.SaveChangesAsync();
         }
 
-        void IDisposable.Dispose()
+        public void Dispose()
         {
             _context.Dispose();
         }
