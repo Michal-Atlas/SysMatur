@@ -25,9 +25,16 @@ namespace Data.Repositories
                 .SessionTokens;
         }
 
-        public Task<User> GetUserByUsernameAsync(string userName)
+        public async Task<User> GetUserByUsernameAsync(string userName)
         {
-            return SysMaturDbContext.Users.FirstOrDefaultAsync(x => x.Username == userName);
+            return await SysMaturDbContext.Users.FirstOrDefaultAsync(x => x.Username == userName);
+        }
+
+        public async Task<User> CreateUserAsync(User user)
+        {
+            await SysMaturDbContext.Users.AddAsync(user);
+            SysMaturDbContext.SaveChangesAsync();
+            return user;
         }
     }
 }
