@@ -1,4 +1,5 @@
 using Data;
+using Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,11 @@ namespace Api
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "api", Version = "v1"}); });
+
+            services.AddScoped<SysMaturDbContext, SysMaturDbContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IFeedService, FeedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
