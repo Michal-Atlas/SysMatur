@@ -8,5 +8,6 @@ namespace Data.Repositories
     {
         Task<Feed> GetFeedByIdAsync(int id);
         Task<IEnumerable<Feed>> GetFeedsByUserIdAsync(int id);
+        Task<IEnumerable<Feed>> GetFeedsByUsernameAsync(string userUsername);
     }
 }
