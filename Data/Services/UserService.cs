@@ -12,20 +12,25 @@ namespace Data.Services
             _unitOfWork = unitOfWork;
         }
 
-        async Task<User> IUserService.CreateUser(User newUser)
+        public async Task<User> GetUserById(int id)
+        {
+            return await _unitOfWork.Users.GetUserByIdAsync(id);
+        }
+
+        public async Task<User> CreateUser(User newUser)
         {
             await _unitOfWork.Users.AddAsync(newUser);
             await _unitOfWork.CommitAsync();
             return newUser;
         }
 
-        async Task IUserService.DeleteUser(User user)
+        public async Task DeleteUser(User user)
         {
             _unitOfWork.Users.Remove(user);
             await _unitOfWork.CommitAsync();
         }
 
-        async Task IUserService.Update(User userToBeUpdated, User user)
+        public async Task Update(User userToBeUpdated, User user)
         {
             userToBeUpdated = user;
             await _unitOfWork.CommitAsync();
