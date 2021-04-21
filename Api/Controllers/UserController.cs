@@ -1,8 +1,7 @@
 using System.Threading.Tasks;
+using Api.Auth;
 using Api.Models;
 using Data;
-using Data.Objects;
-using Data.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -11,34 +10,35 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
+        private readonly IAuthenticator _authenticator;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserService _userService;
 
-        public UserController(IUnitOfWork unitOfWork, IUserService service)
+        public UserController(IUnitOfWork unitOfWork, IAuthenticator authenticator)
         {
             _unitOfWork = unitOfWork;
-            _userService = service;
+            _authenticator = authenticator;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var sessionKey = HttpContext.Request.Cookies["sessionKey"];
-            if (sessionKey == null) return new ForbidResult();
-            return new ObjectResult(new UserModel(await _unitOfWork.SessionTokens.GetUserFromSessionToken(sessionKey)));
+            var user = await _authenticator.VerifyClaim(HttpContext.Request.Cookies["sessionKey"]);
+            if (user == null) return new ForbidResult();
+            return new ObjectResult(new UserModel(
+                await _unitOfWork.SessionTokens.GetUserFromSessionToken(HttpContext.Request.Cookies["sessionKey"])));
         }
 
         [HttpPut]
         public async Task<IActionResult> CreateUser(UserModel user, string passwordHash, string passwordSalt)
         {
-            return new ObjectResult(await _userService.CreateUser(user.ToUser(passwordHash, passwordSalt)));
+            return new ObjectResult(await _unitOfWork.Users.CreateUserAsync(user.ToUser(passwordHash, passwordSalt)));
         }
 
         [HttpGet]
         [Route("salt")]
         public async Task<IActionResult> GetSalt(string userName)
         {
-            return new ObjectResult((await _userService.GetUserByUsername(userName)).PasswordSalt);
+            return new ObjectResult((await _unitOfWork.Users.GetUserByUsernameAsync(userName)).PasswordSalt);
         }
     }
 }
