@@ -6,10 +6,10 @@ namespace Data
 {
     public interface IUnitOfWork : IDisposable
     {
-        IUserRepository Users { get; }
-        IFeedRepository Feeds { get; }
-        IFeedRedditApiRepository FeedRedditApis { get; }
-        ISessionTokenRepository SessionTokens { get; }
-        Task<int> CommitAsync();
+        public IUserRepository Users { get; }
+        public IFeedRepository Feeds { get; }
+        public IFeedRedditApiRepository FeedRedditApis { get; }
+        public ISessionTokenRepository SessionTokens { get; }
+        public Task<int> CommitAsync();
     }
 }
