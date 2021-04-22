@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Threading.Tasks;
 using Data.Objects;
 using Data.Services;
@@ -25,18 +26,25 @@ namespace Api.Auth
         {
             var user = await _userService.GetUserByUsername(userName);
             if (user == null) return null;
-            Console.WriteLine("HGIT");
             if (user.PasswordHash == passwordHash)
             {
                 var rnd = new Random();
-                var newToken = rnd.Next();
-                while (await _sessionTokenService.CheckExists(newToken.ToString("X"))) newToken = rnd.Next();
+                var newToken = GenToken();
+                while (await _sessionTokenService.CheckExists(newToken)) newToken = GenToken();
                 await _sessionTokenService.CreateSessionToken(new SessionToken
-                    {EndOfValidity = DateTime.Today.AddDays(1), Owner = user, Token = newToken.ToString("X")});
-                return newToken.ToString("X");
+                    {EndOfValidity = DateTime.Today.AddDays(1), Owner = user, Token = newToken});
+                return newToken;
             }
 
             return null;
+        }
+
+        public static string GenToken()
+        {
+            var rnd = new Random();
+            var bytes = new byte[32];
+            rnd.NextBytes(bytes);
+            return Encoding.Default.GetString(bytes);
         }
     }
 }
