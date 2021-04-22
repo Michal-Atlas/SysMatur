@@ -20,6 +20,7 @@ namespace Api.Controllers
         {
             var res = await _authenticator.CreateClaim(username, passwordHash);
             if (res == null) return new ForbidResult();
+            Response.Cookies.Append("sessionKey", res);
             return new ObjectResult(res);
         }
     }
