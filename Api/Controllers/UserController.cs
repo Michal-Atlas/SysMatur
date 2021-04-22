@@ -31,7 +31,10 @@ namespace Api.Controllers
         [HttpPut]
         public async Task<IActionResult> CreateUser(UserModel user, string passwordHash, string passwordSalt)
         {
-            return new ObjectResult(await _unitOfWork.Users.CreateUserAsync(user.ToUser(passwordHash, passwordSalt)));
+            var userObj = user.ToUser(passwordHash, passwordSalt);
+            if (await _unitOfWork.Users.CheckExistsAsync(userObj)) return new ForbidResult();
+            ;
+            return new ObjectResult(await _unitOfWork.Users.CreateUserAsync(userObj));
         }
 
         [HttpGet]
