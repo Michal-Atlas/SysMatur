@@ -47,7 +47,7 @@ namespace Api.Controllers
             var user = await _authenticator.VerifyClaim(HttpContext.Request.Cookies["sessionKey"]);
             if (user == null) return new ForbidResult();
 
-            _unitOfWork.Feeds.AddAsync(feed.ToFeed());
+            await _unitOfWork.Feeds.AddAsync(feed.ToFeed());
 
             return new OkResult();
         }
