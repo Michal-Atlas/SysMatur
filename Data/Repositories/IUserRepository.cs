@@ -10,5 +10,6 @@ namespace Data.Repositories
         Task<IEnumerable<SessionToken>> GetWithSessionTokensByIdAsync(int userId);
         Task<User> GetUserByUsernameAsync(string userName);
         Task<User> CreateUserAsync(User user);
+        Task<bool> CheckExistsAsync(User userObj);
     }
 }

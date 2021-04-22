@@ -36,5 +36,10 @@ namespace Data.Repositories
             SysMaturDbContext.SaveChangesAsync();
             return user;
         }
+
+        public async Task<bool> CheckExistsAsync(User user)
+        {
+            return await SysMaturDbContext.Users.AnyAsync(x => x.Username == user.Username);
+        }
     }
 }

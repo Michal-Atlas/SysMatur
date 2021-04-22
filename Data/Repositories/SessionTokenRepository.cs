@@ -20,7 +20,8 @@ namespace Data.Repositories
 
         public async Task<User?> GetUserFromSessionToken(string sessionKey)
         {
-            return (await SysMaturDbContext.SessionTokens.Include(x => x.Owner).FirstAsync(x => x.Token == sessionKey))
+            return (await SysMaturDbContext.SessionTokens.Include(x => x.Owner)
+                    .FirstOrDefaultAsync(x => x.Token == sessionKey))
                 ?.Owner;
         }
 
