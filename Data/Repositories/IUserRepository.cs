@@ -11,5 +11,6 @@ namespace Data.Repositories
         Task<User> GetUserByUsernameAsync(string userName);
         Task<User> CreateUserAsync(User user);
         Task<bool> CheckExistsAsync(User userObj);
+        Task ChangeUser(User oldUser, User newState);
     }
 }

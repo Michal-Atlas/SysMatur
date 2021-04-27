@@ -6,6 +6,7 @@ namespace Api.Models
     {
         public FeedRssModel(Feed feed)
         {
+            Id = feed.Id;
             Url = feed.Url;
             Visible = feed.Visible;
             ApiType = feed.ApiType;
@@ -15,6 +16,7 @@ namespace Api.Models
         {
         }
 
+        public int Id { get; set; }
         public string Url { get; set; }
         public bool Visible { get; set; }
         public ApiType ApiType { get; set; }
@@ -23,6 +25,7 @@ namespace Api.Models
         {
             return new()
             {
+                Id = Id,
                 Url = Url,
                 Visible = Visible,
                 ApiType = ApiType,

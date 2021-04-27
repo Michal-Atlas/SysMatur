@@ -42,5 +42,16 @@ namespace Api.Controllers
         {
             return new ObjectResult((await _unitOfWork.Users.GetUserByUsernameAsync(userName)).PasswordSalt);
         }
+
+        [HttpPatch]
+        public async Task<IActionResult> ChangeUser(UserModel newState)
+        {
+            var user = await _authenticator.VerifyClaim(HttpContext.Request.Cookies["sessionKey"]);
+            if (user == null) return new ForbidResult();
+            var userObj = newState.ToUser("", "");
+            if (await _unitOfWork.Users.CheckExistsAsync(userObj)) return new ForbidResult();
+            await _unitOfWork.Users.ChangeUser(user, userObj);
+            return new OkResult();
+        }
     }
 }

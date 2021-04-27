@@ -41,5 +41,12 @@ namespace Data.Repositories
         {
             return await SysMaturDbContext.Users.AnyAsync(x => x.Username == user.Username);
         }
+
+        public async Task ChangeUser(User oldUser, User newState)
+        {
+            (await SysMaturDbContext.Users.FindAsync(oldUser.Id)).Username = newState.Username;
+            (await SysMaturDbContext.Users.FindAsync(oldUser.Id)).Email = newState.Email;
+            await SysMaturDbContext.SaveChangesAsync();
+        }
     }
 }
