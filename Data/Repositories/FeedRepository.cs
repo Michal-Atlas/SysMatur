@@ -40,6 +40,7 @@ namespace Data.Repositories
         public async Task DeleteFeedAsync(int feedId)
         {
             SysMaturDbContext.Feeds.Remove(await SysMaturDbContext.Feeds.FindAsync(feedId));
+            // TODO: The Database should have a setting to handle this automatically find it an use it
             SysMaturDbContext.FeedRedditApis.RemoveRange(
                 SysMaturDbContext.FeedRedditApis.Where(x => x.Base.Id == feedId));
             await SysMaturDbContext.SaveChangesAsync();

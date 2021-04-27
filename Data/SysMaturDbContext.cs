@@ -11,7 +11,7 @@ namespace Data
         public DbSet<FeedRedditApi> FeedRedditApis { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            // => options.UseSqlite("Data Source=blogging.db");
+            // TODO: Find out how to put this outside
         {
             options.UseNpgsql(@"host=localhost; database=SysMatur_T;user id=postgres; password=Temp1234");
         }
