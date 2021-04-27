@@ -33,7 +33,7 @@ namespace Data.Repositories
         public async Task<User> CreateUserAsync(User user)
         {
             await SysMaturDbContext.Users.AddAsync(user);
-            SysMaturDbContext.SaveChangesAsync();
+            await SysMaturDbContext.SaveChangesAsync();
             return user;
         }
 

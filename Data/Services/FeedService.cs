@@ -15,7 +15,7 @@ namespace Data.Services
 
         async Task<Feed> IFeedService.CreateFeed(Feed newFeed)
         {
-            await _unitOfWork.Feeds.AddAsync(newFeed);
+            await _unitOfWork.Feeds.CreateFeedAsync(newFeed);
             await _unitOfWork.CommitAsync();
             return newFeed;
         }

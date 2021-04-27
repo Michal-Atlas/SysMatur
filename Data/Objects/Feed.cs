@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Data.Objects
 {
@@ -9,12 +10,13 @@ namespace Data.Objects
 
         public bool Visible { get; set; }
         public ApiType ApiType { get; set; }
-        public User Owner { get; set; }
+
+        [JsonIgnore] public User Owner { get; set; }
     }
 
     public enum ApiType
     {
-        Reddit,
         Atom
+        // Reddit,
     }
 }

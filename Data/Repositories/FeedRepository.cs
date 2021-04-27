@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Data.Objects;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +26,14 @@ namespace Data.Repositories
 
         public async Task<IEnumerable<Feed>> GetFeedsByUsernameAsync(string username)
         {
-            return SysMaturDbContext.Feeds.Where(x => x.Owner.Username == username);
+            return (await SysMaturDbContext.Users.Include(x => x.Feeds).FirstAsync(x => x.Username == username)).Feeds;
+        }
+
+        public async Task<Feed> CreateFeedAsync(Feed feed)
+        {
+            await SysMaturDbContext.Feeds.AddAsync(feed);
+            await SysMaturDbContext.SaveChangesAsync();
+            return feed;
         }
     }
 }

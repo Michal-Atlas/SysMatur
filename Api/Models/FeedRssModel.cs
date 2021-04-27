@@ -19,13 +19,14 @@ namespace Api.Models
         public bool Visible { get; set; }
         public ApiType ApiType { get; set; }
 
-        public Feed ToFeed()
+        public Feed ToFeed(User owner)
         {
             return new()
             {
                 Url = Url,
                 Visible = Visible,
-                ApiType = ApiType
+                ApiType = ApiType,
+                Owner = owner
             };
         }
     }

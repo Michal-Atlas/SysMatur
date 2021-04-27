@@ -33,7 +33,6 @@ namespace Api.Controllers
         {
             var userObj = user.ToUser(passwordHash, passwordSalt);
             if (await _unitOfWork.Users.CheckExistsAsync(userObj)) return new ForbidResult();
-            ;
             return new ObjectResult(await _unitOfWork.Users.CreateUserAsync(userObj));
         }
 
