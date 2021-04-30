@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Api.Auth;
 using Api.Models;
-using Data;
 using Data.Objects;
+using Data.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -14,11 +14,11 @@ namespace Api.Controllers
     public class FeedController : ControllerBase
     {
         private readonly IAuthenticator _authenticator;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IFeedService _feedService;
 
-        public FeedController(IUnitOfWork unitOfWork, IAuthenticator authenticator)
+        public FeedController(IFeedService feedService, IAuthenticator authenticator)
         {
-            _unitOfWork = unitOfWork;
+            _feedService = feedService;
             _authenticator = authenticator;
         }
 
@@ -28,7 +28,7 @@ namespace Api.Controllers
             var user = await _authenticator.VerifyClaim(HttpContext.Request.Cookies["sessionKey"]);
             if (user == null) return new ForbidResult();
 
-            var feeds = await _unitOfWork.Feeds.GetFeedsByUsernameAsync(user.Username);
+            var feeds = await _feedService.GetByUsernameAsync(user.Username);
             var returns = new List<object>();
             foreach (var feed in feeds)
                 switch (feed.ApiType)
@@ -48,7 +48,7 @@ namespace Api.Controllers
             var user = await _authenticator.VerifyClaim(HttpContext.Request.Cookies["sessionKey"]);
             if (user == null) return new ForbidResult();
             if (!Enum.IsDefined(typeof(ApiType), feed.ApiType)) return new ConflictResult();
-            return new ObjectResult(await _unitOfWork.Feeds.CreateFeedAsync(feed.ToFeed(user)));
+            return new ObjectResult(await _feedService.CreateAsync(feed.ToFeed(user)));
         }
 
         [HttpDelete]
@@ -56,8 +56,8 @@ namespace Api.Controllers
         {
             var user = await _authenticator.VerifyClaim(HttpContext.Request.Cookies["sessionKey"]);
             if (user == null) return new ForbidResult();
-            if (!await _unitOfWork.Feeds.CheckOwnership(user.Id, feedId)) return new ForbidResult();
-            await _unitOfWork.Feeds.DeleteFeedAsync(feedId);
+            if (!await _feedService.CheckOwnership(user.Id, feedId)) return new ForbidResult();
+            await _feedService.DeleteAsync(feedId);
             return new OkResult();
         }
 
@@ -67,10 +67,10 @@ namespace Api.Controllers
             var user = await _authenticator.VerifyClaim(HttpContext.Request.Cookies["sessionKey"]);
             if (user == null) return new ForbidResult();
 
-            if (!await _unitOfWork.Feeds.CheckOwnership(user.Id, feedId)) return new ForbidResult();
+            if (!await _feedService.CheckOwnership(user.Id, feedId)) return new ForbidResult();
 
-            if (visibility.HasValue) await _unitOfWork.Feeds.SetVisibility(feedId, visibility.Value);
-            if (url != null) await _unitOfWork.Feeds.ChangeUrl(feedId, url);
+            if (visibility.HasValue) await _feedService.SetVisibility(feedId, visibility.Value);
+            if (url != null) await _feedService.ChangeUrl(feedId, url);
             return new OkResult();
         }
     }

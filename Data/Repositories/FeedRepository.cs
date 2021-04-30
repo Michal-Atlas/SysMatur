@@ -15,29 +15,29 @@ namespace Data.Repositories
 
         private SysMaturDbContext SysMaturDbContext => Context;
 
-        Task<Feed> IFeedRepository.GetFeedByIdAsync(int id)
+        public async Task<Feed> GetFeedByIdAsync(int id)
         {
-            return SysMaturDbContext.Feeds.SingleOrDefaultAsync(a => a.Id == id);
+            return await SysMaturDbContext.Feeds.SingleOrDefaultAsync(a => a.Id == id);
         }
 
-        public async Task<IEnumerable<Feed>> GetFeedsByUserIdAsync(int id)
+        public async Task<IEnumerable<Feed>> GetByUserIdAsync(int id)
         {
             return SysMaturDbContext.Users.Include(x => x.Feeds).FirstAsync(x => x.Id == id).Result.Feeds;
         }
 
-        public async Task<IEnumerable<Feed>> GetFeedsByUsernameAsync(string username)
+        public async Task<IEnumerable<Feed>> GetByUsernameAsync(string username)
         {
             return (await SysMaturDbContext.Users.Include(x => x.Feeds).FirstAsync(x => x.Username == username)).Feeds;
         }
 
-        public async Task<Feed> CreateFeedAsync(Feed feed)
+        public async Task<Feed> CreateAsync(Feed feed)
         {
             await SysMaturDbContext.Feeds.AddAsync(feed);
             await SysMaturDbContext.SaveChangesAsync();
             return feed;
         }
 
-        public async Task DeleteFeedAsync(int feedId)
+        public async Task DeleteAsync(int feedId)
         {
             SysMaturDbContext.Feeds.Remove(await SysMaturDbContext.Feeds.FindAsync(feedId));
             // TODO: The Database should have a setting to handle this automatically find it an use it

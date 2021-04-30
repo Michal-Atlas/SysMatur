@@ -8,7 +8,12 @@ namespace Data.Services
     {
         Task<Feed> CreateFeed(Feed newFeed);
         Task DeleteFeed(Feed feed);
-        Task Update(Feed feedToBeUpdated, Feed feed);
         Task<IEnumerable<Feed>> GetFeedsByUserId(int id);
+        Task<Feed> CreateAsync(Feed toFeed);
+        Task<bool> CheckOwnership(int userId, int feedId);
+        Task SetVisibility(int feedId, bool visibility);
+        Task ChangeUrl(int feedId, string? url);
+        Task DeleteAsync(int feedId);
+        Task<IEnumerable<Feed>> GetByUsernameAsync(string userUsername);
     }
 }

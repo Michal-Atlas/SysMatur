@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Api.Auth;
 using Api.Models;
-using Data;
 using Microsoft.AspNetCore.Mvc;
 using SimpleFeedReader;
 
@@ -13,11 +12,9 @@ namespace Api.Controllers
     public class FeedRssController : ControllerBase
     {
         private readonly IAuthenticator _authenticator;
-        private readonly IUnitOfWork _unitOfWork;
 
-        public FeedRssController(IUnitOfWork unitOfWork, IAuthenticator authenticator)
+        public FeedRssController(IAuthenticator authenticator)
         {
-            _unitOfWork = unitOfWork;
             _authenticator = authenticator;
         }
 
