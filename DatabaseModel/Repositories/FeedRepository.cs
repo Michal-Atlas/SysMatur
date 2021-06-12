@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Data.Objects;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
@@ -15,6 +16,12 @@ namespace Data.Repositories
         {
             return SysMaturDbContext.Feeds.SingleOrDefaultAsync(a => a.Id == id);
         }
+
+        Task<IEnumerable<Feed>> IFeedRepository.GetFeedsByUserIdAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private SysMaturDbContext SysMaturDbContext { get { return Context as SysMaturDbContext; } }
     }
 }
