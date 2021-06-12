@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Main Page</title>
+    <style>
+        .name {
+            position: fixed;
+            background-color: rgb(176, 132, 218);
+            top: 0;
+            left: 0;
+            z-index: 101;
+            width: 80%;
+            height: 5%;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 20%;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: darkgray;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <table class="name">
+        <tr>
+            <th><h1 style="margin: 5px;">SysMatur</h1></th>
+        </tr>
+    </table>
+    <div class="sidebar">
+        <h1>Settings</h1>
+        <h4>Show feeds:</h4>
+        @{
+            if (ViewBag.facebook)
+            {
+                <input type="checkbox" id="fb" value="Facebook" checked>
+                <label for="fb">Facebook</label><br>
+            }
+            else
+            {
+                <input type="checkbox" id="fb" value="Facebook">
+                <label for="fb">Facebook</label><br>
+            }
+        }
+        @{
+            if (ViewBag.reddit)
+            {
+                <input type="checkbox" id="rd" value="Reddit" checked>
+                <label for="rd">Reddit</label><br>
+            }
+            else
+            {
+                <input type="checkbox" id="rd" value="Reddit">
+                <label for="rd">Reddit</label><br>
+            }
+        }
+        <button type="button">Set</button><br>
+        <br>
+        <button type="button">Profile</button>
+        <button type="button">Log out</button>
+    </div>
+    <br><br>
+
+    <div class="wrap">
+        @{
+            foreach (var post in ViewBag.feed)
+            {
+                <table style="width: 60%; position: relative; left: 10%; border: 3px solid black; margin-top: 15px;">
+                    <tr>
+                        <td style="width: 5%; border: 1px solid black;" rowspan="2"> Foto</td>
+                        <td>@post.Username</td>
+                        <td style="text-align: right;">@post.Source</td>
+                    </tr>
+                    <tr>
+                        <td>@post.Date</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">@post.Text</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;" colspan="3">FOTO</td>
+                    </tr>
+                </table>
+            }
+        }
+    </div>
+</body>
+</html>
