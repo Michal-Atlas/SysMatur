@@ -29,12 +29,12 @@ namespace SysMatur.Api.Controllers
             if (user == null) return new ForbidResult();
 
             var feeds = await _feedService.GetByUsernameAsync(user.Username);
-            var returns = new List<object>();
+            var returns = new List<FeedBaseModel>();
             foreach (var feed in feeds)
                 switch (feed.ApiType)
                 {
                     case ApiType.Atom:
-                        returns.Add(new FeedRssModel(feed));
+                        returns.Add(new FeedBaseModel(feed));
                         break;
                 }
 
@@ -43,7 +43,7 @@ namespace SysMatur.Api.Controllers
 
         [HttpPut]
         [Route("rss")]
-        public async Task<IActionResult> AddRssFeed(FeedRssModel feed)
+        public async Task<IActionResult> AddRssFeed(FeedBaseModel feed)
         {
             var user = await _authenticator.VerifyClaim(HttpContext.Request.Cookies["sessionKey"]);
             if (user == null) return new ForbidResult();

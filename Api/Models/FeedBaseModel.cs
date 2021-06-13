@@ -2,21 +2,23 @@ using SysMatur.Data.Objects;
 
 namespace SysMatur.Api.Models
 {
-    public class FeedRssModel
+    public class FeedBaseModel
     {
-        public FeedRssModel(Feed feed)
+        public FeedBaseModel(Feed feed)
         {
             Id = feed.Id;
+            Name = feed.Name;
             Url = feed.Url;
             Visible = feed.Visible;
             ApiType = feed.ApiType;
         }
 
-        public FeedRssModel()
+        public FeedBaseModel()
         {
         }
 
         public int Id { get; set; }
+        public string Name { get; set; }
         public string Url { get; set; }
         public bool Visible { get; set; }
         public ApiType ApiType { get; set; }
@@ -26,6 +28,7 @@ namespace SysMatur.Api.Models
             return new()
             {
                 Id = Id,
+                Name = Name,
                 Url = Url,
                 Visible = Visible,
                 ApiType = ApiType,

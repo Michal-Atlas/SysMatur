@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SimpleFeedReader;
@@ -23,17 +25,19 @@ namespace SysMatur.Api.Controllers
         {
             var user = await _authenticator.VerifyClaim(HttpContext.Request.Cookies["sessionKey"]);
             if (user == null) return new ForbidResult();
+            
+            Console.WriteLine(url);
 
             var reader = new FeedReader();
             var items = reader.RetrieveFeed(url);
             var output = new List<Post>();
-
+            
             foreach (var item in items)
                 output.Add(new Post
                 {
                     Title = item.Title,
                     Date = item.PublishDate,
-                    Images = item.Images,
+                    Image = item.Images.FirstOrDefault(),
                     Summary = item.Summary,
                     Body = item.Content,
                     Anchor = item.Uri
