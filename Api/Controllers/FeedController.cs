@@ -41,8 +41,8 @@ namespace SysMatur.Api.Controllers
             return new ObjectResult(returns);
         }
 
-        [HttpPut]
-        [Route("rss")]
+        [HttpPost]
+        [Route("Rss")]
         public async Task<IActionResult> AddRssFeed(FeedBaseModel feed)
         {
             var user = await _authenticator.VerifyClaim(HttpContext.Request.Cookies["sessionKey"]);
@@ -62,15 +62,28 @@ namespace SysMatur.Api.Controllers
         }
 
         [HttpPatch]
-        public async Task<IActionResult> Update(int feedId, bool? visibility, string? url)
+        [Route("Visibility")]
+        public async Task<IActionResult> Update(int feedId, bool visibility)
         {
             var user = await _authenticator.VerifyClaim(HttpContext.Request.Cookies["sessionKey"]);
             if (user == null) return new ForbidResult();
 
             if (!await _feedService.CheckOwnership(user.Id, feedId)) return new ForbidResult();
 
-            if (visibility.HasValue) await _feedService.SetVisibility(feedId, visibility.Value);
-            if (url != null) await _feedService.ChangeUrl(feedId, url);
+            await _feedService.SetVisibility(feedId, visibility);
+            return new OkResult();
+        }
+
+        [HttpPatch]
+        [Route("Url")]
+        public async Task<IActionResult> Update(int feedId, string url)
+        {
+            var user = await _authenticator.VerifyClaim(HttpContext.Request.Cookies["sessionKey"]);
+            if (user == null) return new ForbidResult();
+
+            if (!await _feedService.CheckOwnership(user.Id, feedId)) return new ForbidResult();
+
+            await _feedService.ChangeUrl(feedId, url);
             return new OkResult();
         }
     }
