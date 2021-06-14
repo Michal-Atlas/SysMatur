@@ -2,6 +2,9 @@ import './SideBar.css';
 import {FeedBase} from "../Classes/FeedModel";
 import {Link} from "react-router-dom";
 import Cookies from "universal-cookie";
+import {Button} from "react-bootstrap";
+import axios from "axios";
+import React from "react";
 
 const SideBar = (props: { feeds: FeedBase[] }) => {
     const cookies = new Cookies();
@@ -12,21 +15,19 @@ const SideBar = (props: { feeds: FeedBase[] }) => {
             {
                 props.feeds.map((f: FeedBase) =>
                     <>
-                        <input type="checkbox" id="fb" value={f.id} checked={f.visible}/>
+                        <input type={"checkbox"} defaultChecked={f.visible} onChange={(event) =>{axios.patch("/Feed/Visibility", {},{params: {feedId: f.id, visibility: event.target.checked}});document.location.reload()}}/>
                         <label htmlFor="fb">{f.name}</label>
                         <br/>
                     </>
                 )
             }
 
-
-            <button>Set</button>
             <br/>
-            <button>Add feed</button>
+            <Link to={"/feedsmanage"}><Button>Manage Feeds</Button></Link>
             <br/>
             <br/>
-            <Link to={"/profile"}><button>Edit Profile</button></Link>
-            <button onClick={() => {cookies.remove("sessionKey"); document.location.reload();}}>Log out</button>
+            <Link to={"/profile"}><Button>Edit Profile</Button></Link>
+            <Button onClick={() => {cookies.remove("sessionKey"); document.location.reload();}}>Log out</Button>
         </div>
     );
 }

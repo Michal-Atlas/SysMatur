@@ -3,6 +3,7 @@ import './Profile.css';
 import React from "react";
 import {ProfileModel} from "./Classes/ProfileModel";
 import axios from "axios";
+import {Button} from "react-bootstrap";
 
 const Profile = () => {
     const [user, SetUser] = React.useState<ProfileModel>();
@@ -13,11 +14,11 @@ const Profile = () => {
     return (<div className={"Profile"}>
         {user &&
         <>
-            <Link to={"/"}>Back</Link><br/><br/>
+            <Link to={"/"}><Button>Back</Button></Link><br/><br/>
             <input type={"text"} defaultValue={user.username} onChange={(event) => SetUser({username: event.target.value, email: user.email})} />
             <input type={"text"} defaultValue={user.email} onChange={(event) => SetUser({username: user.username, email: event.target.value})} />
             <br/><br/>
-            <button onClick={() => axios.patch("/User", user).catch(console.error)}>Save</button>
+            <Button onClick={() => axios.patch("/User", user).catch(console.error)}>Save</Button>
         </>
         }
     </div>);

@@ -7,6 +7,8 @@ import {Route} from "react-router";
 import {BrowserRouter} from "react-router-dom";
 import Profile from "./Profile";
 import Logon from "./Logon";
+import FeedManage from "./FeedManage";
+import 'bootstrap/scss/bootstrap.scss';
 
 ReactDOM.render(
     <><table className="Name">
@@ -19,6 +21,7 @@ ReactDOM.render(
             <Route exact path='/' component={App}/>
             <Route path='/profile' component={Profile}/>
             <Route path={'/logon'} component={Logon}/>
+            <Route path={'/feedsmanage'} component={FeedManage}/>
         </React.StrictMode>
     </BrowserRouter></>,
     document.getElementById('root')

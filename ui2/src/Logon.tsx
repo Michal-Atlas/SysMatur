@@ -21,7 +21,7 @@ const Logon = () => {
     return <div className={"Logon"}>
         <input type={"text"} name={"username"} placeholder={"Username"} value={user.username}
                onChange={(event) => SetUser({username: event.target.value, email: user.email})}/>
-        <input type={"password"} name={"password"} placeholder={"Password"}value={password}
+        <input type={"password"} name={"password"} placeholder={"Password"} value={password}
                onChange={(event) => SetPassword(event.target.value)}/>
         <button type={"submit"} onClick={SubmitLogon}>Logon</button>
         <br/><br/>
@@ -32,21 +32,33 @@ const Logon = () => {
         <button type={"submit"} onClick={SubmitRegister}>Register</button>
     </div>;
 
-    async function SubmitLogon(event: any) {
+    async function SubmitLogon() {
         const salt = await GetSalt();
-        if (!salt) { return; }
-        const hash = bcrypt.hash(password,salt);
-        console.log(hash);
+        if (!salt) {
+            return;
+        }
+        const hash = bcrypt.hashSync(password, salt);
+        axios.post("/Auth", {}, {
+            params: {
+                username: user.username,
+                passwordHash: hash
+            }
+        }).then(() =>
+            document.location.reload()
+        ).catch(console.error);
     }
 
     function SubmitRegister(event: any) {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
-        axios.put("/User",{
-            user,
-            passwordHash: hash,
-            passwordSalt: salt
-        }).catch(console.error);
+        axios.post("/User", user, {
+                params: {
+                    passwordHash: hash,
+                    passwordSalt: salt,
+                }
+            }
+        ).then().catch(console.error);
+        SubmitLogon().then();
     }
 
     async function GetSalt(): Promise<string | void> {
