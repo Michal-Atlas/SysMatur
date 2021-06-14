@@ -15,7 +15,7 @@ namespace SysMatur.Api.Controllers
             _authenticator = authenticator;
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> New(string username, string passwordHash)
         {
             var res = await _authenticator.CreateClaim(username, passwordHash);

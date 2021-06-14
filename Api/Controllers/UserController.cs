@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using SysMatur.Data.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -28,11 +29,11 @@ namespace SysMatur.Api.Controllers
                 await _userService.GetUserFromSessionToken(HttpContext.Request.Cookies["sessionKey"])));
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> CreateUser(UserModel user, string passwordHash, string passwordSalt)
         {
             var userObj = user.ToUser(passwordHash, passwordSalt);
-            if (await _userService.CheckExistsAsync(userObj)) return new ForbidResult();
+            if (await _userService.CheckExistsAsync(userObj)) return new ConflictResult();
             return new ObjectResult(await _userService.CreateUserAsync(userObj));
         }
 
