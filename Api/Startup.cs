@@ -1,8 +1,11 @@
 using SysMatur.Data;
 using SysMatur.Data.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -33,8 +36,14 @@ namespace SysMatur.Api
             services.AddTransient<IFeedService, FeedService>();
             services.AddTransient<ISessionTokenService, SessionTokenService>();
             services.AddTransient<IAuthenticator, Authenticator>();
-
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                    {
+                        builder.WithOrigins("https://localhost:3000","https://localhost:5001");
+                    }
+                    );
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +61,7 @@ namespace SysMatur.Api
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
