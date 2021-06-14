@@ -1,0 +1,7 @@
+.Post {
+    width: 60%;
+    position: relative;
+    left: 10%;
+    border: 3px solid black;
+    margin-top: 15px;
+}
