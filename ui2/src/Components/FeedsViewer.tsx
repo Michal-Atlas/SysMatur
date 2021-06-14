@@ -8,21 +8,24 @@ import {FeedBase} from "../Classes/FeedModel";
 const FeedsViewer = (props: { feeds: FeedBase[] }) => {
     const [posts, SetPosts] = React.useState<{ feedName: string, post: PostModel }[]>([]);
     React.useEffect(() => {
-            let tempPosts: { feedName: string, post: PostModel }[] = [];
             props.feeds.forEach(feed => {
                 if (feed.visible) {
                     axios.get<PostModel[]>("/FeedRss", {params: {url: feed.url}}).then(
                         result => {
-                            tempPosts.push(
-                                ...result.data.map(d => {
-                                    return {feedName: feed.name, post: d}
-                                }));
-                            SetPosts(tempPosts.sort((a, b) => +b.post.date - (+a.post.date)));
+                            SetPosts(p =>
+                                [
+                                    ...p,
+                                    ...result.data.map(d => {
+                                        return {feedName: feed.name, post: d}
+                                    })
+                                ]);
+
                             console.log(feed.name, posts.length)
                         })
                         .catch(console.error);
                 }
             });
+            SetPosts(p => p.sort((a, b) => +b.post.date - (+a.post.date)));
         }
         , [props.feeds]);
     return (
