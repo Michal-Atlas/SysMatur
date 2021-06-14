@@ -21,7 +21,7 @@ const FeedsViewer = (props: { feeds: FeedBase[] }) => {
             tempPosts.sort();
             SetPosts(tempPosts);
         }
-        , []);
+        , [props.feeds]);
     return (
         <>
             {

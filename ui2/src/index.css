@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Name {
+  position: fixed;
+  background-color: rgb(176, 132, 218);
+  top: 0;
+  left: 0;
+  z-index: 101;
+  width: 100vw;
+  height: 5%;
+}
+
+.Name h1 {
+  margin: 5px;
+}

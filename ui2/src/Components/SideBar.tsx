@@ -1,26 +1,32 @@
 import './SideBar.css';
 import {FeedBase} from "../Classes/FeedModel";
+import {Link} from "react-router-dom";
+import Cookies from "universal-cookie";
 
-const SideBar = (props: {feeds: FeedBase[]}) => {
+const SideBar = (props: { feeds: FeedBase[] }) => {
+    const cookies = new Cookies();
     return (
         <div className="SideBar">
             <h1>Settings</h1>
             <h4>Show feeds:</h4>
-                {
-                        props.feeds.map((f: FeedBase) =>{
-                <><input type="checkbox" id="fb" value={f.id}/>
-                        <label htmlFor="fb">{f.name}</label><br/></>
-                })
-                }
+            {
+                props.feeds.map((f: FeedBase) =>
+                    <>
+                        <input type="checkbox" id="fb" value={f.id} checked={f.visible}/>
+                        <label htmlFor="fb">{f.name}</label>
+                        <br/>
+                    </>
+                )
+            }
 
 
-            <button type="button">Set</button>
+            <button>Set</button>
             <br/>
-            <button type="button">Add feed</button>
+            <button>Add feed</button>
             <br/>
             <br/>
-            <button type="button">Profile</button>
-            <button type="button">Log out</button>
+            <Link to={"/profile"}><button>Edit Profile</button></Link>
+            <button onClick={() => {cookies.remove("sessionKey"); document.location.reload();}}>Log out</button>
         </div>
     );
 }

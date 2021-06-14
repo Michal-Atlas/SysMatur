@@ -4,8 +4,12 @@ import FeedsViewer from "./Components/FeedsViewer";
 import {FeedBase} from "./Classes/FeedModel";
 import React from "react";
 import axios from "axios";
+import Cookies from "universal-cookie";
+import {useHistory} from "react-router";
 
 const App = () => {
+    const cookie = new Cookies();
+    const history = useHistory();
     const [feeds, SetFeeds] = React.useState<FeedBase[]>([]);
     React.useEffect(() => {
             axios.get<FeedBase[]>("/Feed").then(result => {
@@ -13,13 +17,13 @@ const App = () => {
             }).catch(console.error);
         }
         , []);
+    if (!cookie.get("sessionKey")) {
+        console.log("logged out");
+        history.push("/logon");
+    }
+    console.log(feeds);
     return (
         <>
-            <table className="Name">
-                <tr>
-                    <th><h1>SysMatur</h1></th>
-                </tr>
-            </table>
             <SideBar feeds={feeds}/>
             <br/><br/><br/>
 
