@@ -1,0 +1,10 @@
+.FeedManage {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    min-width: 50vw;
+    max-width: 80vw;
+    overflow: auto;
+}

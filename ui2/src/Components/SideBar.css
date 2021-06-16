@@ -1,0 +1,10 @@
+.SideBar {
+  height: 100%;
+  width: 20%;
+  position: fixed;
+  z-index: 102;
+  top: 0;
+  right: 0;
+  background-color: darkgray;
+  text-align: center;
+}
