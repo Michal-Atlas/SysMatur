@@ -13,7 +13,8 @@ namespace SysMatur.Data
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             // TODO: Find out how to put this outside
         {
-            options.UseNpgsql(@"host=localhost; database=SysMatur_T;user id=postgres; password=Temp1234");
+            //options.UseNpgsql(@"host=localhost; database=SysMatur_T;user id=postgres; password=Temp1234");
+            options.UseSqlite("Data Source=sys.db;");
         }
     }
 }
